@@ -1,110 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#08090d">
-  <title>Nova – Social</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>nova-sozial-website.pages.dev</title>
+<style>
+  :root { color-scheme: dark; box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: #202124;
+    color: #bdc1c6;
+    font-family: "Segoe UI", Tahoma, system-ui, -apple-system, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 600px; margin: 0 auto; padding: 138px 20px 0; }
+  .icon { display: block; width: 33px; height: 42px; }
+  h1 { color: #9aa0a6; font-size: 24px; font-weight: 500; line-height: 1.3; margin: 48px 0 0; }
+  p { margin: 14px 0 0; }
+  p.first { margin-top: 18px; }
+  a { color: #8ab4f8; text-decoration: none; }
+  .code { color: #9aa0a6; font-size: 12px; margin-top: 24px; text-transform: none; }
+  button {
+    margin-top: 48px;
+    background: #8ab4f8; color: #202124;
+    border: 0; border-radius: 16px;
+    height: 31px; min-width: 92px; padding: 0 16px;
+    font: inherit; font-size: 13px; cursor: pointer;
+  }
+  button:hover { background: #a1c2fa; }
+  button:focus-visible { outline: 2px solid #e8eaed; outline-offset: 2px; }
+</style>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <a class="logo" href="#home">nova<span>.</span></a>
-      <nav class="nav">
-        <a href="#home" data-route="home"><span class="symbol">⌂</span><span class="side-text">Startseite</span></a>
-        <a href="#account" data-route="account"><span class="symbol">◉</span><span class="side-text">Mein Konto</span></a>
-      </nav>
-      <div id="sideAccount" class="side-account">Nicht angemeldet</div>
-      <button id="logout" class="btn secondary hidden" type="button">Abmelden</button>
-    </aside>
-
-    <main>
-      <header class="topbar">
-        <a class="mobile-logo logo" href="#home">nova<span>.</span></a>
-        <h1 id="pageTitle">Für dich</h1>
-        <button id="reload" class="btn secondary small" type="button">Neu laden</button>
-      </header>
-
-      <section id="authPanel" class="panel">
-        <h2 id="authHeading">Willkommen bei Nova</h2>
-        <form id="authForm">
-          <input id="username" placeholder="Benutzername (3–24 Zeichen)" minlength="3" maxlength="24" autocomplete="username">
-          <input id="email" type="email" placeholder="E-Mail-Adresse" required autocomplete="email">
-          <input id="password" type="password" placeholder="Passwort" required minlength="6" autocomplete="new-password">
-          <div class="row wrap">
-            <button id="authSubmit" class="btn" type="submit">Registrieren</button>
-            <button id="switchAuth" class="btn secondary" type="button">Ich habe ein Konto</button>
-            <button id="forgot-password" class="text-button" type="button">Passwort vergessen?</button>
-          </div>
-          <p id="authStatus" class="status" aria-live="polite"></p>
-        </form>
-      </section>
-
-      <section id="feedSection">
-        <section id="composer" class="panel hidden">
-          <h2>Was gibt’s Neues?</h2>
-          <form id="postForm">
-            <textarea id="postText" maxlength="280" placeholder="Schreibe einen Beitrag … (max. 280 Zeichen)"></textarea>
-            <div class="row wrap">
-              <label class="btn secondary file-label" for="postImage">Bild hinzufügen</label>
-              <input id="postImage" class="file-input" type="file" accept="image/jpeg,image/png,image/webp">
-              <span id="postImageName" class="status">Kein Bild ausgewählt</span>
-              <span id="charCount" class="status">0 / 280</span>
-              <button id="postSubmit" class="btn" type="submit">Veröffentlichen</button>
-            </div>
-            <p id="postStatus" class="status" aria-live="polite"></p>
-          </form>
-        </section>
-        <div id="feedStatus" class="feed-status">Lade Nova …</div>
-        <div id="feed"></div>
-      </section>
-
-      <section id="profileView" class="hidden">
-        <div id="profileHeader" class="profile-header"></div>
-        <div id="profilePosts"></div>
-      </section>
-
-      <section id="accountView" class="hidden">
-        <div class="profile-header">
-          <h2>Mein Konto</h2>
-          <div id="accountPreview"></div>
-          <form id="profileForm">
-            <label for="editUsername">Benutzername</label>
-            <input id="editUsername" minlength="3" maxlength="24" required>
-            <label for="editBio">Biografie</label>
-            <textarea id="editBio" maxlength="160" placeholder="Erzähl etwas über dich …"></textarea>
-            <label class="btn secondary file-label" for="avatarFile">Profilbild ändern</label>
-            <input id="avatarFile" class="file-input" type="file" accept="image/jpeg,image/png,image/webp">
-            <p id="avatarStatus" class="status">Profilbild: JPG, PNG oder WebP, max. 2 MB.</p>
-            <button id="saveProfile" class="btn" type="submit">Profil speichern</button>
-            <p id="profileStatus" class="status" aria-live="polite"></p>
-          </form>
-        </div>
-        <div class="panel">
-          <h2>Deine Beiträge</h2>
-          <div id="myPosts"></div>
-        </div>
-      </section>
-    </main>
-
-    <aside class="rightbar">
-      <div class="box">
-        <h2>Willkommen bei Nova</h2>
-        <p>Teile Gedanken, entdecke Profile und folge anderen Mitgliedern.</p>
-      </div>
-      <div class="box">
-        <h2>Info</h2>
-        <p>Dein Profil und deine Beiträge sind öffentlich, wenn deine Supabase-Richtlinien das erlauben.</p>
-      </div>
-    </aside>
+  <div class="wrap">
+    <svg class="icon" viewBox="0 0 33 42" fill="none" shape-rendering="crispEdges" aria-hidden="true">
+      <path d="M1 1H23L32 10V41H1Z" stroke="#9aa0a6" stroke-width="2"/>
+      <path d="M23 1V10H32" stroke="#9aa0a6" stroke-width="2"/>
+      <rect x="9" y="12" width="3" height="5" fill="#9aa0a6"/>
+      <rect x="18" y="12" width="3" height="5" fill="#9aa0a6"/>
+      <path d="M9 31H11V28H20V31H22" stroke="#9aa0a6" stroke-width="2"/>
+    </svg>
+    <h1>Die Website ist nicht erreichbar</h1>
+    <p class="first">Prüfe, ob „nova-sozial-website.pages.dev“ einen Tippfehler enthält.</p>
+    <p>Wenn die URL keinen Tippfehler enthält, <a href="#netzwerkdiagnose" onclick="return false">kannst du die Windows-Netzwerkdiagnose durchführen</a>.</p>
+    <p class="code">DNS_PROBE_FINISHED_NXDOMAIN</p>
+    <button type="button" onclick="location.reload()">Neu laden</button>
   </div>
-
-  <nav class="bottom-nav">
-    <a href="#home">⌂<span>Start</span></a>
-    <a href="#account">◉<span>Konto</span></a>
-  </nav>
-
-  <script type="module" src="app.js"></script>
 </body>
 </html>
